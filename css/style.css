@@ -10444,3 +10444,44 @@ body.body_dark .header-menu.header-menu-2 .menu > .nav-item > .nav-link {
   align-items: center;
   cursor: pointer;
 }
+  /* Style for the card container */
+  #modalCard {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    max-width: 400px;
+    width: 100%;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    z-index: 1000;
+    border-radius: 10px;
+  }
+
+  /* Style for overlay (background) */
+  #overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+  }
+
+  /* Additional styling for card content */
+  #modalContent {
+    text-align: center;
+  }
+
+  /* Style for the close button */
+  #closeBtn {
+    cursor: pointer;
+    color: #007BFF;
+    font-weight: bold;
+    margin-top: 10px;
+    display: inline-block;
+  }
