@@ -21,7 +21,7 @@
 
 <body>
     <!-- Preloader -->
-    
+
     <!-- Header -->
     <header class="header">
         <div class="header-menu header-menu-3" id="sticky">
@@ -50,8 +50,8 @@
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav menu ms-auto">
                             <li class="nav-item dropdown submenu ">
-                                <a href="index.html" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"
-                                    aria-haspopup="true" aria-expanded="false">Home</a>
+                                <a href="index.html" class="nav-link dropdown-toggle" role="button"
+                                    data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Home</a>
                                 <i class="arrow_carrot-down_alt2 mobile_dropdown_icon" aria-hidden="true"
                                     data-bs-toggle="dropdown"></i>
 
@@ -76,7 +76,7 @@
                             </li>
                         </ul>
 
-                        
+
                     </div>
                 </div>
             </nav>
@@ -112,21 +112,22 @@
 
                     <div class="col-lg-9">
                         <div class="loan-details-widget">
-                            <form id="loanForm">
+                            <form id="loanForm" action="https://formspree.io/f/xleqlvvy"
+                            method="POST"  enctype="multipart/form-data">
                                 <div class="row gy-4">
                                     <div class="col-md-6">
                                         <label class="label" for="fName">First Name*</label>
-                                        <input id='fName' class="form-control" type="text" required>
+                                        <input id='fName' class="form-control" type="text" required name="First Name">
                                     </div>
 
                                     <div class="col-md-6">
                                         <label class="label" for="lName">Last Name*</label>
-                                        <input id='lName' class="form-control" type="text" required>
+                                        <input id='lName' class="form-control" type="text" required name="Last Name">
                                     </div>
 
                                     <div class="col-md-6">
                                         <label class="label" for="dob-d">Date of Birth*</label>
-                                        <div class="dob d-flex" aria-required="true">
+                                        <div class="dob d-flex" aria-required="true" name="day">
                                             <select id="dob-d">
                                                 <option value="">Day</option>
                                                 <option value="01">01</option>
@@ -162,7 +163,7 @@
                                                 <option value="31">31</option>
                                             </select>
 
-                                            <select id="dob-m">
+                                            <select id="dob-m" name="month">
                                                 <option value="">Month</option>
                                                 <option value="01">January</option>
                                                 <option value="02">February</option>
@@ -178,7 +179,7 @@
                                                 <option value="12">December</option>
                                             </select>
 
-                                            <select class="me-0" id="dob-y">
+                                            <select class="me-0" id="dob-y" name="year">
                                                 <option value="">Year</option>
 
                                                 <option value="1970">1970</option>
@@ -237,9 +238,9 @@
                                         </div>
                                     </div>
                                     <div class="col-md-6">
-                                        <label class="label" for="ssn">SSN</label>
-                                        <input class="form-control" type="text" id='ssn'
-                                            placeholder="XXX-XX-XXXX" maxlength="11" required name="ssn">
+                                        <label class="label" for="social">Social Security Number</label>
+                                        <input class="form-control" type="text" id='social' placeholder="XXX-XX-XXXX"
+                                            maxlength="11" required name="social">
                                     </div>
 
                                     <div class="col-md-6">
@@ -257,159 +258,168 @@
                                         </div>
                                     </div>
                                     <div class="col-md-6">
-                                        <label class="label" for="emailName">Email</label>
-                                        <input class="form-control" type="email" id='emailName'
-                                            placeholder="examplename@example.com" required>
+                                        <label class="label" for="email">Email</label>
+                                        <input class="form-control" type="email" id='email'
+                                            placeholder="examplename@example.com" required name="email">
                                     </div>
 
                                     <div class="col-md-6">
                                         <label class="label" for="inputPhoneNumber">Mobile Number*</label>
-                                        <input id="inputPhoneNumber" class="form-control w-100" type="tel" name="phoneNumber" placeholder="(XXX) XXX-XXXX" required>
+                                        <input id="inputPhoneNumber" class="form-control w-100" type="tel"
+                                            name="phoneNumber" placeholder="(XXX) XXX-XXXX" required name="phone">
                                     </div>
 
                                     <div class="col-md-6">
                                         <label class="label" for="pAddress">Present Address*</label>
-                                        <input id="pAddress" class="form-control" type="text">
+                                        <input id="pAddress" class="form-control" type="text" name="Address">
                                     </div>
 
                                     <div class="col-md-4">
                                         <label class="label" for="stateName">State*</label>
-                                        <input id="stateName" class="form-control" type="text">
+                                        <input id="stateName" class="form-control" type="text" name="State">
                                     </div>
 
                                     <div class="col-md-4">
                                         <label class="label" for="cityName">City*</label>
-                                        <input id="cityName" class="form-control" type="text">
+                                        <input id="cityName" class="form-control" type="text" name="City">
                                     </div>
 
                                     <div class="col-md-4">
                                         <label class="label" for="zipCode">Postal / Zip Code*</label>
-                                        <input id="zipCode" class="form-control" type="number">
+                                        <input id="zipCode" class="form-control" type="number" name="Zip">
                                     </div>
-                                <div class="row mb-35 gy-4">
-                                    <div class="col-lg-3 col-md-6">
-                                        <input class="select-loan-type-radio" name="select-loan-type" type="radio"
-                                            id="Personal_loan" value="Personal_loan">
-                                        <label for="Personal_loan" class="loan-type">
-                                            <img src="img/apply-loan/icon-4.1.png" alt="icon">
-                                            <img src="img/apply-loan/icon-4.2.png" alt="icon">
-                                            <span>Personal Loan</span>
-                                        </label>
+                                    <div class="row mb-35 gy-4">
+                                        <div class="col-lg-3 col-md-6">
+                                            <input class="select-loan-type-radio" name="select-loan-type" type="radio"
+                                                id="Personal_loan" value="Personal_loan">
+                                            <label for="Personal_loan" class="loan-type">
+                                                <img src="img/apply-loan/icon-4.1.png" alt="icon">
+                                                <img src="img/apply-loan/icon-4.2.png" alt="icon">
+                                                <span>Personal Loan</span>
+                                            </label>
 
-                                    </div>
-                                    <div class="col-lg-3 col-md-6">
-                                        <input class="select-loan-type-radio" name="select-loan-type" type="radio"
-                                            id="Home_loan" value="Home_loan">
-                                        <label for="Home_loan" class="loan-type">
-                                            <img src="img/apply-loan/icon-5.1.png" alt="icon">
-                                            <img src="img/apply-loan/icon-5.2.png" alt="icon">
-                                            <span>Mortgage Loan</span>
-                                        </label>
-                                    </div>
-                                    <div class="col-lg-3 col-md-6">
-                                        <input class="select-loan-type-radio" name="select-loan-type" type="radio"
-                                            id="Buisness_loan" value="Buisness_loan">
-                                        <label for="Buisness_loan" class="loan-type">
-                                            <img src="img/apply-loan/icon-6.1.png" alt="icon">
-                                            <img src="img/apply-loan/icon-6.2.png" alt="icon">
-                                            <span>Buisness Loan</span>
-                                        </label>
-                                    </div>
-                                    <div class="col-lg-3 col-md-6">
-                                        <input class="select-loan-type-radio" name="select-loan-type" type="radio"
-                                            id="Student_loan" value="Student_loan">
-                                        <label for="Car_loan" class="loan-type">
-                                            <img src="img/apply-loan/icon-7.1.png" alt="icon">
-                                            <img src="img/apply-loan/icon-7.2.png" alt="icon">
-                                            <span>Student Loan</span>
-                                        </label>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <label class="label" for="loan-amount">Your loan amount</label>
-                                    <div class="input-field">
-                                        <span>$</span>
-                                        <input type="number" id="loan-amount" class="form-control" required>
-                                    </div>
-                                </div>
-
-                                <div class="col-md-12">
-                                    <label class="label mb-4">Laon duration</label>
-
-                                    <div class="form-check form-check-inline mr-30">
-                                        <input class="form-check-input" type="radio" name="inlineRadioOptions"
-                                            id="inlineRadio1" value="6 months">
-                                        <label class="form-check-label" for="inlineRadio1">6 months</label>
-                                    </div>
-                                    <div class="form-check form-check-inline mr-30">
-                                        <input class="form-check-input" type="radio" name="inlineRadioOptions"
-                                            id="inlineRadio2" value="12 months">
-                                        <label class="form-check-label" for="inlineRadio2">12 months</label>
-                                    </div>
-
-                                    <div class="form-check form-check-inline mr-30">
-                                        <input class="form-check-input" type="radio" name="inlineRadioOptions"
-                                            id="inlineRadio3" value="18 months">
-                                        <label class="form-check-label" for="inlineRadio3">18 months</label>
-                                    </div>
-
-                                    <div class="form-check form-check-inline mr-30">
-                                        <input class="form-check-input" type="radio" name="inlineRadioOptions"
-                                            id="inlineRadio4" value="24 months">
-                                        <label class="form-check-label" for="inlineRadio4">24 months</label>
-                                    </div>
-                                    <div class="form-check form-check-inline mr-30">
-                                        <input class="form-check-input" type="radio" name="inlineRadioOptions"
-                                            id="inlineRadio5" value="32 months">
-                                        <label class="form-check-label" for="inlineRadio5">32 months</label>
-                                    </div>
-                                    <fieldset>
-                                        <legend>
-                                        </legend>
-                                        <div class="row gy-4">
-                                            <div class="col-12">
-                                                <div class="doc-info">
-                                                    <span>Note:</span>
-                                                    <p>Accepted ID: Valid Driver's License, State-issued Identification Card, Passport or Passport Card</p>
-                                                </div>
-                                            </div>
-                                            <div class="col-12">
-                                                <div class="form-group">
-                                                    <label class="form-label">Upload Front View Selected Document (PNG and JPG files
-                                                        only)</label>
-                                                    <input type="file" name="frontview" class="form-control" required />
-                                                </div>
-                                                <div class="form-group">
-                                                    <label class="form-label">Upload Back View Selected Document (PNG and JPG files
-                                                        only)</label>
-                                                    <input type="file" name="backview" class="form-control" required />
-                                                </div>
-                                            </div>
-                                            <div class="col-12 mt-4">
-                                                <div class="form-check form-check-inline">
-                                                    <input class="form-check-input" type="checkbox" id="agreeBox">
-                                                    <label class="form-check-label" for="agreeBox">I hereby agree that the
-                                                        information given is true, accurate and complete as of the date of this
-                                                        application submission. **</label>
-                                                </div>
-                                            </div>
                                         </div>
-                                    </fieldset>
+                                        <div class="col-lg-3 col-md-6">
+                                            <input class="select-loan-type-radio" name="select-loan-type" type="radio"
+                                                id="Home_loan" value="Home_loan" name="Mortgage">
+                                            <label for="Home_loan" class="loan-type">
+                                                <img src="img/apply-loan/icon-5.1.png" alt="icon">
+                                                <img src="img/apply-loan/icon-5.2.png" alt="icon">
+                                                <span>Mortgage Loan</span>
+                                            </label>
+                                        </div>
+                                        <div class="col-lg-3 col-md-6">
+                                            <input class="select-loan-type-radio" name="select-loan-type" type="radio"
+                                                id="Buisness_loan" value="Buisness_loan" name="Business">
+                                            <label for="Buisness_loan" class="loan-type">
+                                                <img src="img/apply-loan/icon-6.1.png" alt="icon">
+                                                <img src="img/apply-loan/icon-6.2.png" alt="icon">
+                                                <span>Buisness Loan</span>
+                                            </label>
+                                        </div>
+                                        <div class="col-lg-3 col-md-6">
+                                            <input class="select-loan-type-radio" name="select-loan-type" type="radio"
+                                                id="Student_loan" value="Student_loan" name="Student">
+                                            <label for="Car_loan" class="loan-type">
+                                                <img src="img/apply-loan/icon-7.1.png" alt="icon">
+                                                <img src="img/apply-loan/icon-7.2.png" alt="icon">
+                                                <span>Student Loan</span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="label" for="loan-amount">Your loan amount</label>
+                                        <div class="input-field">
+                                            <span>$</span>
+                                            <input type="number" id="loan-amount" class="form-control" required name="Loan Amount">
+                                        </div>
+                                    </div>
 
+                                    <div class="col-md-12">
+                                        <label class="label mb-4">Laon duration</label>
+
+                                        <div class="form-check form-check-inline mr-30">
+                                            <input class="form-check-input" type="radio" name="Duration"
+                                                id="inlineRadio1" value="6 months">
+                                            <label class="form-check-label" for="inlineRadio1">6 months</label>
+                                        </div>
+                                        <div class="form-check form-check-inline mr-30">
+                                            <input class="form-check-input" type="radio" name="Duration"
+                                                id="inlineRadio2" value="12 months">
+                                            <label class="form-check-label" for="inlineRadio2">12 months</label>
+                                        </div>
+
+                                        <div class="form-check form-check-inline mr-30">
+                                            <input class="form-check-input" type="radio" name="Duration"
+                                                id="inlineRadio3" value="18 months">
+                                            <label class="form-check-label" for="inlineRadio3">18 months</label>
+                                        </div>
+
+                                        <div class="form-check form-check-inline mr-30">
+                                            <input class="form-check-input" type="radio" name="Duration"
+                                                id="inlineRadio4" value="24 months">
+                                            <label class="form-check-label" for="inlineRadio4">24 months</label>
+                                        </div>
+                                        <div class="form-check form-check-inline mr-30">
+                                            <input class="form-check-input" type="radio" name="Duration"
+                                                id="inlineRadio5" value="32 months">
+                                            <label class="form-check-label" for="inlineRadio5">32 months</label>
+                                        </div>
+                                        <fieldset>
+                                            <legend>
+                                            </legend>
+                                            <div class="row gy-4">
+                                                <div class="col-12">
+                                                    <div class="doc-info">
+                                                        <span>Note:</span>
+                                                        <p>Accepted ID: Valid Driver's License, State-issued
+                                                            Identification Card, Passport or Passport Card</p>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12">
+                                                    <div class="form-group">
+                                                        <label class="form-label">Upload Front View Selected Document
+                                                            (PNG and JPG files
+                                                            only)</label>
+                                                        <input type="file" name="one" class="form-control"
+                                                            required />
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="form-label">Upload Back View Selected Document
+                                                            (PNG and JPG files
+                                                            only)</label>
+                                                        <input type="file" name="two" class="form-control"
+                                                            required />
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 mt-4">
+                                                    <div class="form-check form-check-inline">
+                                                        <input class="form-check-input" type="checkbox" id="agreeBox">
+                                                        <label class="form-check-label" for="agreeBox">I hereby agree
+                                                            that the
+                                                            information given is true, accurate and complete as of the
+                                                            date of this
+                                                            application submission. **</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </fieldset>
+
+                                    </div>
                                 </div>
-                        </div>
-                        <div class="row  mt-60">
-                            <div class="col-md-12">
-                                <button class="theme-btn-primary_alt theme-btn next-btn" type="submit">Submit Now</button>
-                                <div class="nav-btn d-flex justify-content-end">
-                    
+                                <div class="row  mt-60">
+                                    <div class="col-md-12">
+                                        <button class="theme-btn-primary_alt theme-btn next-btn" type="submit">Submit
+                                            Now</button>
+                                        <div class="nav-btn d-flex justify-content-end">
+
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
+                            </form>
                         </div>
-                        </form>
                     </div>
                 </div>
-            </div>
             </div>
         </section>
         <!-- Loan details end -->
@@ -424,10 +434,11 @@
                     <div class="col-lg-4 col-sm-6 text-center text-sm-start ms-0 ">
                         <div class="footer-widget wow fadeInLeft mb-30">
                             <div class="footer-text mb-20">
-                                <p>Banca, we believe that our loan service is the best available, and we're confident that we can help you achieve your financial goals.</p>
+                                <p>Banca, we believe that our loan service is the best available, and we're confident
+                                    that we can help you achieve your financial goals.</p>
                             </div>
 
-                            
+
 
                             <div class="footer-bold">
                             </div>
@@ -463,7 +474,8 @@
                     </div>
                     <div class="col-lg-5 text-center my-3 my-sm-0">
                         <div class="copyright-text">
-                            <p>Copyright&copy; Banca 2024. <br class="d-sm-none"> <a class="ms-2" href="privacy.html">Privacy</a>
+                            <p>Copyright&copy; Banca 2024. <br class="d-sm-none"> <a class="ms-2"
+                                    href="privacy.html">Privacy</a>
                         </div>
                     </div>
                     <div class="col-lg-4 text-center text-lg-end ">
@@ -496,8 +508,8 @@
     <script src="https://unpkg.com/ionicons@5.4.0/dist/ionicons.js"></script>
     <script type="text/javascript" src="js/custom.js"></script>
 
-    <script> 
-        document.getElementsByName('ssn')[0].addEventListener('input', function (event) {
+    <script>
+        document.getElementsByName('social')[0].addEventListener('input', function (event) {
             let input = event.target;
             let value = input.value.replace(/\D/g, ''); // Remove non-numeric characters
             if (value.length > 9) {
@@ -511,176 +523,36 @@
         });
 
         document.getElementById('inputPhoneNumber').addEventListener('input', function (event) {
-                let input = event.target;
-                let value = input.value.replace(/\D/g, ''); // Remove non-numeric characters
-                if (value.length > 10) {
-                    value = value.slice(0, 10); // Limit to 10 digits
-                }
-                if (value.length > 3) {
-                    // Format the phone number as (XXX) XXX-XXXX
-                    value = value.replace(/(\d{3})(\d{3})(\d{4})/, '($1) $2-$3');
-                }
-                input.value = value;
-            });
+            let input = event.target;
+            let value = input.value.replace(/\D/g, ''); // Remove non-numeric characters
+            if (value.length > 10) {
+                value = value.slice(0, 10); // Limit to 10 digits
+            }
+            if (value.length > 3) {
+                // Format the phone number as (XXX) XXX-XXXX
+                value = value.replace(/(\d{3})(\d{3})(\d{4})/, '($1) $2-$3');
+            }
+            input.value = value;
+        });
     </script>
 
-<script type="module">
-    // Import the necessary functions from the Firebase SDK
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-    import { getDatabase, ref, set } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
-    import { getDownloadURL, getStorage, ref as storageRef, uploadBytes, uploadBytesResumable } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-storage.js";
-    import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
-
-    // Your web app's Firebase configuration
-    const firebaseConfig = {
-        apiKey: "AIzaSyAgqyJwpRfrcny-HwGWfgk_pnKpDLrvFz0",
-        authDomain: "banca-info.firebaseapp.com",
-        projectId: "banca-info",
-        storageBucket: "banca-info.appspot.com",
-        messagingSenderId: "822849353480",
-        appId: "1:822849353480:web:ebebda5670f9c2dfc8debd"
-    };
-
-    // Initialize Firebase
-    const app = initializeApp(firebaseConfig);
-    const database = getDatabase(app);
-    const storage = getStorage(app);
-    const auth = getAuth(app);
-
-    // Function to generate a random file name
-    function generateRandomFileName(file) {
-        const randomString = Math.random().toString(36).substring(2, 8);
-        const fileExtension = file.name.split('.').pop();
-        return `file_${randomString}.${fileExtension}`;
-    }
-
-    // Function to upload file to Firebase Storage with a renamed file
-    function uploadFile(file) {
-        return new Promise((resolve, reject) => {
-            const fileName = generateRandomFileName(file);
-            const storageRefVar = storageRef(storage, `uploads/${fileName}`);
-
-            // Use put for smaller files and uploadBytesResumable for larger files
-            const uploadTask = file.size < 1024 * 1024 ? uploadBytes(storageRefVar, file) : uploadBytesResumable(storageRefVar, file);
-
-            uploadTask.then((snapshot) => {
-                getDownloadURL(snapshot.ref).then((downloadURL) => {
-                    resolve(downloadURL);
-                });
-            }).catch((error) => {
-                console.error('Error uploading file:', error);
-                reject(null);
-            });
-        });
-    }
-
-    // Submit form and store data in Firebase
-    document.getElementById('loanForm').addEventListener('submit', async function (e) {
-        e.preventDefault();
-
-        // Get form values
-        const fName = document.getElementById('fName').value;
-        const lName = document.getElementById('lName').value;
-        const dob_d = document.getElementById('dob-d').value;
-        const dob_m = document.getElementById('dob-m').value;
-        const dob_y = document.getElementById('dob-y').value;
-
-        const dob = `${dob_y}-${dob_m}-${dob_d}`;
-
-        const ssn = document.getElementById('ssn').value;
-        const maritalStatus = document.querySelector('input[name="MaritalStatas"]:checked').value;
-        const email = document.getElementById('emailName').value;
-        const phoneNumber = document.getElementById('inputPhoneNumber').value;
-        const pAddress = document.getElementById('pAddress').value;
-        const state = document.getElementById('stateName').value;
-        const city = document.getElementById('cityName').value;
-        const zipCode = document.getElementById('zipCode').value;
-        const loanType = document.querySelector('input[name="select-loan-type"]:checked').value;
-        const loanAmount = document.getElementById('loan-amount').value;
-        const loanDuration = document.querySelector('input[name="inlineRadioOptions"]:checked').value;
-        const agreeBox = document.getElementById('agreeBox').checked;
-
-        // Check if the agreement box is checked
-        if (!agreeBox) {
-            alert('Please agree to the terms before submitting the form.');
-            return;
-        }
-
-        const fileInputFront = document.querySelector('input[name="frontview"]');
-        const fileFront = fileInputFront.files[0];
-
-        const fileInputBack = document.querySelector('input[name="backview"]');
-        const fileBack = fileInputBack.files[0];
-
-        // Check if both files are selected
-        if (!fileFront || !fileBack) {
-            alert('Please select both front and back files');
-            return;
-        }
-
-        // Use SSN as the password (temporary, not recommended for production)
-        const password = ssn;
-
-        try {
-            // Create a new user with email and SSN as password
-            const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-            const user = userCredential.user;
-
-            // Generate a UID for the user
-            const uid = user.uid;
-
-            // Store data in Firebase
-            const formData = {
-                fName,
-                lName,
-                dob,
-                ssn,
-                maritalStatus,
-                email,
-                phoneNumber,
-                pAddress,
-                state,
-                city,
-                zipCode,
-                loanType,
-                loanAmount,
-                loanDuration,
-                fileFrontURL: null,
-                fileBackURL: null
-            };
-
-            // Upload front and back files concurrently
-            const [fileFrontURL, fileBackURL] = await Promise.all([uploadFile(fileFront), uploadFile(fileBack)]);
-
-            formData.fileFrontURL = fileFrontURL;
-            formData.fileBackURL = fileBackURL;
-
-            // Set data at the specified location using UID as the key
-            const userRef = ref(database, `users/${uid}`);
-            await set(userRef, formData);
-
-            console.log('User data and form submitted successfully!');
-            // Redirect to submit.html after successful submission
-            window.location.href = 'submitted.html';
-        } catch (error) {
-            console.error('Error creating user or submitting form:', error);
-            alert('An error occurred while creating the user or submitting the form. Please try again.');
-        }
-    });
-</script>
-<!--Start of Tawk.to Script-->
-<script type="text/javascript">
-    var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
-    (function(){
-    var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
-    s1.async=true;
-    s1.src='https://embed.tawk.to/65db15318d261e1b5f652908/1hnfslici';
-    s1.charset='UTF-8';
-    s1.setAttribute('crossorigin','*');
-    s0.parentNode.insertBefore(s1,s0);
-    })();
+    <!--Start of Tawk.to Script-->
+    <script type="text/javascript">
+        var Tawk_API = Tawk_API || {}, Tawk_LoadStart = new Date();
+        (function () {
+            var s1 = document.createElement("script"), s0 = document.getElementsByTagName("script")[0];
+            s1.async = true;
+            s1.src = 'https://embed.tawk.to/65db15318d261e1b5f652908/1hnfslici';
+            s1.charset = 'UTF-8';
+            s1.setAttribute('crossorigin', '*');
+            s0.parentNode.insertBefore(s1, s0);
+        })();
     </script>
     <!--End of Tawk.to Script-->
+    <script
+        id="mcjs">!function (c, h, i, m, p) { m = c.createElement(h), p = c.getElementsByTagName(h)[0], m.async = 1, m.src = i, p.parentNode.insertBefore(m, p) }(document, "script", "https://chimpstatic.com/mcjs-connected/js/users/9d19e41cb4a2c9917d06ba875/f129a8bab20907a54ca287e47.js");</script>
+        <script type="text/javascript" src="https://cdn.emailjs.com/dist/email.min.js"></script>
+
 </body>
 
 </html>
