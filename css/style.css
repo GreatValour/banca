@@ -10504,6 +10504,7 @@ body.body_dark .header-menu.header-menu-2 .menu > .nav-item > .nav-link {
     z-index: 999; /* Ensure the loader is on top of other elements */
 }
 
+
 #wifi-loader svg {
     position: absolute;
     display: flex;
