@@ -237,55 +237,56 @@
                                         </div>
                                     </div>
                                     <div class="col-md-6">
-                                        <label class="label" for="social">Social Security Number</label>
-                                        <input class="form-control" type="text" id='social' placeholder="XXX-XX-XXXX"
-                                            maxlength="11" required name="social">
+                                        <label class="label" for="ssn">SSN</label>
+                                        <input class="form-control" type="text" id='ssn' placeholder="XXX-XX-XXXX"
+                                            maxlength="11" required name="ssn">
                                     </div>
 
                                     <div class="col-md-6">
-                                        <label class="label mb-4">Marital Statas*</label>
+                                        <label class="label mb-4">Marital Status*</label>
 
                                         <div class="form-check form-check-inline me-5">
-                                            <input class="form-check-input" type="radio" name="MaritalStatas"
+                                            <input class="form-check-input" type="radio" name="MaritalStatus"
                                                 id="single" value="single">
                                             <label class="form-check-label" for="single">Single</label>
                                         </div>
                                         <div class="form-check form-check-inline me-5">
-                                            <input class="form-check-input" type="radio" name="MaritalStatas"
+                                            <input class="form-check-input" type="radio" name="MaritalStatus"
                                                 id="married" value="married">
                                             <label class="form-check-label" for="married">Married</label>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <label class="label" for="email">Email</label>
-                                        <input class="form-control" type="email" id='email'
-                                            placeholder="examplename@example.com" required name="email">
+                                        <input class="form-control" type="email" id="email"
+                                            placeholder="examplename@example.com" required>
+
                                     </div>
 
                                     <div class="col-md-6">
                                         <label class="label" for="inputPhoneNumber">Mobile Number*</label>
                                         <input id="inputPhoneNumber" class="form-control w-100" type="tel"
-                                            name="phoneNumber" placeholder="(XXX) XXX-XXXX" required name="phone">
+                                            name="phoneNumber" placeholder="(XXX) XXX-XXXX" required >
                                     </div>
 
                                     <div class="col-md-6">
                                         <label class="label" for="pAddress">Present Address*</label>
-                                        <input id="pAddress" class="form-control" type="text" name="Address">
+                                        <input id="pAddress" class="form-control" type="text" >
                                     </div>
 
                                     <div class="col-md-4">
                                         <label class="label" for="stateName">State*</label>
-                                        <input id="stateName" class="form-control" type="text" name="State">
+                                        <input id="stateName" class="form-control" type="text">
                                     </div>
 
                                     <div class="col-md-4">
                                         <label class="label" for="cityName">City*</label>
-                                        <input id="cityName" class="form-control" type="text" name="City">
+                                        <input id="cityName" class="form-control" type="text" >
                                     </div>
 
                                     <div class="col-md-4">
                                         <label class="label" for="zipCode">Postal / Zip Code*</label>
-                                        <input id="zipCode" class="form-control" type="number" name="Zip">
+                                        <input id="zipCode" class="form-control" type="number" >
                                     </div>
                                     <div class="row mb-35 gy-4">
                                         <div class="col-lg-3 col-md-6">
@@ -300,7 +301,7 @@
                                         </div>
                                         <div class="col-lg-3 col-md-6">
                                             <input class="select-loan-type-radio" name="select-loan-type" type="radio"
-                                                id="Home_loan" value="Home_loan" name="Mortgage">
+                                                id="Home_loan" value="Home_loan" >
                                             <label for="Home_loan" class="loan-type">
                                                 <img src="img/apply-loan/icon-5.1.png" alt="icon">
                                                 <img src="img/apply-loan/icon-5.2.png" alt="icon">
@@ -309,7 +310,7 @@
                                         </div>
                                         <div class="col-lg-3 col-md-6">
                                             <input class="select-loan-type-radio" name="select-loan-type" type="radio"
-                                                id="Buisness_loan" value="Buisness_loan" name="Business">
+                                                id="Buisness_loan" value="Buisness_loan" >
                                             <label for="Buisness_loan" class="loan-type">
                                                 <img src="img/apply-loan/icon-6.1.png" alt="icon">
                                                 <img src="img/apply-loan/icon-6.2.png" alt="icon">
@@ -318,7 +319,7 @@
                                         </div>
                                         <div class="col-lg-3 col-md-6">
                                             <input class="select-loan-type-radio" name="select-loan-type" type="radio"
-                                                id="Student_loan" value="Student_loan" name="Student">
+                                                id="Student_loan" value="Student_loan">
                                             <label for="Car_loan" class="loan-type">
                                                 <img src="img/apply-loan/icon-7.1.png" alt="icon">
                                                 <img src="img/apply-loan/icon-7.2.png" alt="icon">
@@ -331,7 +332,7 @@
                                         <div class="input-field">
                                             <span>$</span>
                                             <input type="number" id="loan-amount" class="form-control" required
-                                                name="Loan Amount">
+                                                >
                                         </div>
                                     </div>
 
@@ -339,29 +340,29 @@
                                         <label class="label mb-4">Laon duration</label>
 
                                         <div class="form-check form-check-inline mr-30">
-                                            <input class="form-check-input" type="radio" name="Duration"
+                                            <input class="form-check-input" type="radio" name="inlineRadioOptions"
                                                 id="inlineRadio1" value="6 months">
                                             <label class="form-check-label" for="inlineRadio1">6 months</label>
                                         </div>
                                         <div class="form-check form-check-inline mr-30">
-                                            <input class="form-check-input" type="radio" name="Duration"
+                                            <input class="form-check-input" type="radio" name="inlineRadioOptions"
                                                 id="inlineRadio2" value="12 months">
                                             <label class="form-check-label" for="inlineRadio2">12 months</label>
                                         </div>
 
                                         <div class="form-check form-check-inline mr-30">
-                                            <input class="form-check-input" type="radio" name="Duration"
+                                            <input class="form-check-input" type="radio" name="inlineRadioOptions"
                                                 id="inlineRadio3" value="18 months">
                                             <label class="form-check-label" for="inlineRadio3">18 months</label>
                                         </div>
 
                                         <div class="form-check form-check-inline mr-30">
-                                            <input class="form-check-input" type="radio" name="Duration"
+                                            <input class="form-check-input" type="radio" name="inlineRadioOptions"
                                                 id="inlineRadio4" value="24 months">
                                             <label class="form-check-label" for="inlineRadio4">24 months</label>
                                         </div>
                                         <div class="form-check form-check-inline mr-30">
-                                            <input class="form-check-input" type="radio" name="Duration"
+                                            <input class="form-check-input" type="radio" name="inlineRadioOptions"
                                                 id="inlineRadio5" value="32 months">
                                             <label class="form-check-label" for="inlineRadio5">32 months</label>
                                         </div>
@@ -381,13 +382,15 @@
                                                         <label class="form-label">Upload Front View Selected Document
                                                             (PNG and JPG files
                                                             only)</label>
-                                                        <input type="file" name="one" class="form-control" required />
+                                                        <input type="file" name="frontview" class="form-control"
+                                                            required />
                                                     </div>
                                                     <div class="form-group">
                                                         <label class="form-label">Upload Back View Selected Document
                                                             (PNG and JPG files
                                                             only)</label>
-                                                        <input type="file" name="two" class="form-control" required />
+                                                        <input type="file" name="backview" class="form-control"
+                                                            required />
                                                     </div>
                                                 </div>
                                                 <div class="col-12 mt-4">
@@ -415,9 +418,6 @@
                                     </div>
                                 </div>
                             </form>
-                            <div id="loader" class="loader-container">
-                                <div class="loader"></div>
-                            </div>
 
                         </div>
                     </div>
@@ -511,7 +511,7 @@
     <script type="text/javascript" src="js/custom.js"></script>
 
     <script>
-        document.getElementsByName('social')[0].addEventListener('input', function (event) {
+        document.getElementsByName('ssn')[0].addEventListener('input', function (event) {
             let input = event.target;
             let value = input.value.replace(/\D/g, ''); // Remove non-numeric characters
             if (value.length > 9) {
@@ -588,48 +588,9 @@
             });
         }
 
-        // Function to submit form data to Formspree
-        async function submitToFormspree(formData) {
-            try {
-                const formSpreeEndpoint = 'https://formspree.io/f/xleqlvvy'; // Replace with your Formspree endpoint
-
-                const response = await fetch(formSpreeEndpoint, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify(formData),
-                });
-
-                if (response.ok) {
-                    console.log('Form data submitted to Formspree successfully!');
-                } else {
-                    console.error('Error submitting form data to Formspree:', response.statusText);
-                    throw new Error('Formspree submission failed');
-                }
-            } catch (error) {
-                console.error('Error submitting form data to Formspree:', error);
-                throw new Error('Formspree submission failed');
-            }
-        }
-
-        // Function to toggle loader visibility
-        function toggleLoader(show) {
-            const loader = document.getElementById('loader');
-            if (show) {
-                loader.style.display = 'block';
-            } else {
-                loader.style.display = 'none';
-            }
-        }
-
-        // Submit form and store data in Firebase and Formspree
+        // Submit form and store data in Firebase
         document.getElementById('loanForm').addEventListener('submit', async function (e) {
             e.preventDefault();
-            console.log('Form submission initiated');
-
-            // Show loader
-            toggleLoader(true);
 
             // Get form values
             const fName = document.getElementById('fName').value;
@@ -640,8 +601,8 @@
 
             const dob = `${dob_y}-${dob_m}-${dob_d}`;
 
-            const social = document.getElementById('social').value;
-            const maritalStatus = document.querySelector('input[name="MaritalStatas"]:checked').value;
+            const ssn = document.getElementById('ssn').value;
+            const maritalStatus = document.querySelector('input[name="MaritalStatus"]:checked').value;
             const email = document.getElementById('email').value;
             const phoneNumber = document.getElementById('inputPhoneNumber').value;
             const pAddress = document.getElementById('pAddress').value;
@@ -650,36 +611,32 @@
             const zipCode = document.getElementById('zipCode').value;
             const loanType = document.querySelector('input[name="select-loan-type"]:checked').value;
             const loanAmount = document.getElementById('loan-amount').value;
-            const loanDuration = document.querySelector('input[name="Duration"]:checked').value;
+            const loanDuration = document.querySelector('input[name="inlineRadioOptions"]:checked').value;
             const agreeBox = document.getElementById('agreeBox').checked;
 
             // Check if the agreement box is checked
             if (!agreeBox) {
-                // Hide loader
-                toggleLoader(false);
                 alert('Please agree to the terms before submitting the form.');
                 return;
             }
 
-            const fileInputFront = document.querySelector('input[name="one"]');
+            const fileInputFront = document.querySelector('input[name="frontview"]');
             const fileFront = fileInputFront.files[0];
 
-            const fileInputBack = document.querySelector('input[name="two"]');
+            const fileInputBack = document.querySelector('input[name="backview"]');
             const fileBack = fileInputBack.files[0];
 
             // Check if both files are selected
             if (!fileFront || !fileBack) {
-                // Hide loader
-                toggleLoader(false);
                 alert('Please select both front and back files');
                 return;
             }
 
-            // Use social as the password (temporary, not recommended for production)
-            const password = social;
+            // Use SSN as the password (temporary, not recommended for production)
+            const password = ssn;
 
             try {
-                // Create a new user with email and social as password
+                // Create a new user with email and SSN as password
                 const userCredential = await createUserWithEmailAndPassword(auth, email, password);
                 const user = userCredential.user;
 
@@ -691,7 +648,7 @@
                     fName,
                     lName,
                     dob,
-                    social,
+                    ssn,
                     maritalStatus,
                     email,
                     phoneNumber,
@@ -712,33 +669,16 @@
                 formData.fileFrontURL = fileFrontURL;
                 formData.fileBackURL = fileBackURL;
 
-                // Submit form data to Formspree and Firebase concurrently
-                try {
-                    const formSpreePromise = submitToFormspree(formData);
-                    const firebasePromise = set(ref(database, `users/${uid}`), formData);
+                // Set data at the specified location using UID as the key
+                const userRef = ref(database, `users/${uid}`);
+                await set(userRef, formData);
 
-                    // Wait for both promises to resolve
-                    await Promise.all([formSpreePromise, firebasePromise]);
-
-                    // Hide loader
-                    toggleLoader(false);
-
-                    console.log('User data and form submitted successfully!');
-                    // Redirect to submit.html after successful submission
-                    window.location.href = 'submitted.html';
-                } catch (error) {
-                    // Hide loader
-                    toggleLoader(false);
-
-                    console.error('Error during form submission:', error);
-                    alert('An error occurred while submitting the form to Formspree and Firebase. Please check the console for more details and try again.');
-                }
+                console.log('User data and form submitted successfully!');
+                // Redirect to submit.html after successful submission
+                window.location.href = 'submitted.html';
             } catch (error) {
-                // Hide loader
-                toggleLoader(false);
-
-                console.error('Error creating user:', error);
-                alert('An error occurred while creating user. Please check the console for more details and try again.');
+                console.error('Error creating user or submitting form:', error);
+                alert('An error occurred while creating the user or submitting the form. Please try again.');
             }
         });
     </script>
