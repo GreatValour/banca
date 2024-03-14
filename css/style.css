@@ -10504,6 +10504,15 @@ body.body_dark .header-menu.header-menu-2 .menu > .nav-item > .nav-link {
     z-index: 999; /* Ensure the loader is on top of other elements */
 }
 
+/* Media query for mobile devices with screen width up to 768px */
+@media only screen and (max-width: 768px) {
+    #wifi-loader {
+        width: 48px; /* Adjust width for smaller screens */
+        height: 48px; /* Adjust height for smaller screens */
+    }
+}
+
+
 
 #wifi-loader svg {
     position: absolute;
