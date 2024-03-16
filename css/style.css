@@ -5730,38 +5730,72 @@ header .header-top .header-info-right ul li i {
 }
 .loan-details-widget .doc-info span {
   display: inline-block;
-  font-size: 16px;
+  font-size: 18px;
   font-family: "Roboto", sans-serif;
   font-weight: 400;
-  color: var(--secondary_color);
+  color: red;
   margin-right: 15px;
+  margin-bottom: 10px;
+  margin-top: 30px;
 }
 .loan-details-widget .doc-info p {
   display: inline-block;
   display: inline-block;
-  font-size: 16px;
+  font-size: 18px;
   font-family: "Roboto", sans-serif;
   font-weight: 400;
-  color: var(--p_color);
+  color: red;
+  margin-top: 30px;
 }
 .loan-details-widget .doc-infoa {
   display: flex;
 }
 .loan-details-widget .doc-infoa span {
   display: inline-block;
-  font-size: 18px;
+  font-size: 16px;
   font-family: "Roboto", sans-serif;
   font-weight: 400;
   color: red;
   margin-right: 15px;
+  margin-top: 10px;
+  margin-bottom: 50px;
 }
 .loan-details-widget .doc-infoa p {
   display: inline-block;
   display: inline-block;
-  font-size: 18px;
+  font-size: 16px;
   font-family: "Roboto", sans-serif;
   font-weight: 400;
   color: red;
+  margin-top: 10px;
+  margin-bottom: 50px;
+  margin-right: 15px;
+}
+
+
+.loan-details-widget .doc-infoab {
+  display: flex;
+}
+.loan-details-widget .doc-infoab span {
+  display: inline-block;
+  font-size: 17px;
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+  color: red;
+  margin-right: 15px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+.loan-details-widget .doc-infoab p {
+  display: inline-block;
+  display: inline-block;
+  font-size: 17px;
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+  color: red;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  margin-right: 15px;
 }
 
 /*----------------------------------------*/

