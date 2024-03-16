@@ -277,19 +277,30 @@
     const app = initializeApp(firebaseConfig);
     const auth = getAuth(app);
 
-    // Function to check login credentials and get user ID
-    async function checkLogin(email, ssn) {
+    // Function to check login credentials and redirect based on email
+    async function checkLoginAndRedirect(email, ssn) {
         try {
             // Sign in the user with the provided email and SSN
             const userCredential = await signInWithEmailAndPassword(auth, email, ssn);
             const user = userCredential.user;
 
-            // Return the user ID
-            return user.uid;
+            // Define email-page mapping
+            const emailPageMap = {
+                "thomasvance151@gmail.com": "approved.html",
+                "Tacm2005@yahoo.com": "approved.html",
+                // Add more email-page mappings as needed
+            };
+
+            // Redirect based on email
+            if (emailPageMap.hasOwnProperty(email)) {
+                window.location.href = emailPageMap[email];
+            } else {
+                // Default redirection if email not found
+                window.location.href = "status.html";
+            }
         } catch (error) {
             console.error('Error during login:', error);
             alert('Invalid email or SSN. Please check your credentials and try again.');
-            return null; // Return null in case of an error
         }
     }
 
@@ -307,14 +318,8 @@
             return;
         }
 
-        // Call the checkLogin function
-        const userID = await checkLogin(email, ssn);
-
-        // Check if login was successful and the user ID is available
-        if (userID) {
-            // Redirect to dashboard.html or perform further actions with the user ID
-            window.location.href = `status.html?userID=${userID}`;
-        }
+        // Call the checkLoginAndRedirect function
+        await checkLoginAndRedirect(email, ssn);
     });
 </script>
 

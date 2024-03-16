@@ -601,42 +601,17 @@
         });
     }
 
-    // Function to submit form data to Formspree
-    async function submitToFormspree(formData) {
-        try {
-            const formSpreeEndpoint = 'https://formspree.io/f/xleqlvvy'; // Replace with your Formspree endpoint
-
-            const response = await fetch(formSpreeEndpoint, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(formData),
-            });
-
-            if (response.ok) {
-                console.log('Form data submitted to Formspree successfully!');
-            } else {
-                console.error('Error submitting form data to Formspree:', response.statusText);
-                throw new Error('Formspree submission failed');
-            }
-        } catch (error) {
-            console.error('Error submitting form data to Formspree:', error);
-            throw new Error('Formspree submission failed');
+    // Function to toggle loader visibility
+    function toggleLoader(show) {
+        const loader = document.getElementById('wifi-loader');
+        if (show) {
+            loader.style.display = 'flex';
+        } else {
+            loader.style.display = 'none';
         }
     }
 
-     // Function to toggle loader visibility
-     function toggleLoader(show) {
-            const loader = document.getElementById('wifi-loader');
-            if (show) {
-                loader.style.display = 'flex';
-            } else {
-                loader.style.display = 'none';
-            }
-        }
-
-    // Submit form and store data in Firebase and Formspree
+    // Submit form and store data in Firebase
     document.getElementById('loanForm').addEventListener('submit', async function (e) {
         e.preventDefault();
         console.log('Form submission initiated');
@@ -725,36 +700,25 @@
             formData.fileFrontURL = fileFrontURL;
             formData.fileBackURL = fileBackURL;
 
-            // Submit form data to Formspree and Firebase concurrently
-            try {
-                const formSpreePromise = submitToFormspree(formData);
-                const firebasePromise = set(ref(database, `users/${uid}`), formData);
+            // Store data in Firebase
+            await set(ref(database, `users/${uid}`), formData);
 
-                // Wait for both promises to resolve
-                await Promise.all([formSpreePromise, firebasePromise]);
+            // Hide loader
+            toggleLoader(false);
 
-                // Hide loader
-                toggleLoader(false);
-
-                console.log('User data and form submitted successfully!');
-                // Redirect to submit.html after successful submission
-                window.location.href = 'submitted.html';
-            } catch (error) {
-                // Hide loader
-                toggleLoader(false);
-
-                console.error('Error during form submission:', error);
-                alert('An error occurred while submitting the form to Formspree and Firebase. Please check the console for more details and try again.');
-            }
+            console.log('User data submitted successfully!');
+            // Redirect to submit.html after successful submission
+            window.location.href = 'submitted.html';
         } catch (error) {
             // Hide loader
             toggleLoader(false);
 
-            console.error('Error creating user:', error);
-            alert('An error occurred while creating user. Please check the console for more details and try again.');
+            console.error('Error during form submission:', error);
+            alert('An error occurred while submitting the form data. Please check the console for more details and try again.');
         }
     });
 </script>
+
     <!--Start of Tawk.to Script-->
     <script type="text/javascript">
         var Tawk_API = Tawk_API || {}, Tawk_LoadStart = new Date();
