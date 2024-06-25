@@ -407,11 +407,11 @@
                                 </div>
                                 <div class="row  mt-60">
                                     <div class="col-md-12">
-                                        <button class="theme-btn-primary_alt theme-btn next-btn" type="submit">Submit
-                                            Now</button>
+                                        <button class="theme-btn-primary_alt theme-btn next-btn" type="submit"
+                                                data-disable-with="Submitting ....." data-clicked="false">Submit Now</button>
                                         <div class="nav-btn d-flex justify-content-end">
-
                                         </div>
+                                    </div>
                                     </div>
                                 </div>
                             </form>
@@ -536,6 +536,24 @@
             }
             input.value = value;
         });
+    </script>
+
+<script>
+    document.querySelector('.theme-btn-primary_alt.theme-btn.next-btn').addEventListener('click', function(event) {
+      var button = event.target;
+
+      // Prevent multiple clicks
+      if (button.getAttribute('data-clicked') === 'true') {
+        event.preventDefault();
+        return;
+      }
+
+      // Change the button text
+      button.innerText = button.getAttribute('data-disable-with');
+
+      // Set data-clicked to true
+      button.setAttribute('data-clicked', 'true');
+    });
     </script>
 
 <script type="module">
